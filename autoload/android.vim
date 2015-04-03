@@ -40,6 +40,7 @@ function! android#findManifest()
   let old_wildignore = &wildignore
   set wildignore+=*/build/*
   let path = split(system("git rev-parse --show-toplevel"), "\n")[0]
+  let g:syntastic_java_javac_classpath = path . "/**/build/intermediates/**/*.jar:$ANDROID_HOME/platforms/android-*/*.jar:$ANDROID_HOME/extras/android/support/v*/*.jar"
   let g:android_manifest = globpath(path, "**/src/**/AndroidManifest.xml")
   let &wildignore = old_wildignore
   return g:android_manifest
